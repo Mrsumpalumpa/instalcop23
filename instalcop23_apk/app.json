@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "instalcop23_apk",
+    "slug": "instalcop23_apk",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo_min.jpg",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/logo_min.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/logo_min.jpg",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/logo_min.jpg"
+    }
+  }
+}
