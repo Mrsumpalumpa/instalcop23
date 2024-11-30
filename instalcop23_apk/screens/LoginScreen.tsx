@@ -1,12 +1,11 @@
-import {Text,View,} from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../models/generics';
-type LoginScreenProps = NativeStackScreenProps<RootStackParamsList,"Login">
+import Login from '../components/Login';
+import {LoginScreenProps} from '../models/generics'
+
 const LoginScreen = (props:LoginScreenProps) => {
     return (
-    <View>
-        <Text>This is {props.route.name}'</Text>
-
-    </View>
+      <>
+      <Login {...props}/>
+      </>
+    
   )};
 export default LoginScreen

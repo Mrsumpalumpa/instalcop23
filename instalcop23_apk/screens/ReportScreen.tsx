@@ -1,13 +1,14 @@
-import {Text,View,} from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../models/generics';
 import Report from '../components/Report';
 import ReportProvider from '../providers/ReportProvider';
-type ReportScreenProps = NativeStackScreenProps<RootStackParamsList,"Report">
+import { ReportScreenProps } from '../models/generics';
+import { StatusBar } from 'expo-status-bar';
+
 const ReportScreen = (props:ReportScreenProps) => {
     return (
-      <ReportProvider>
-        <Report props={props}/>
-      </ReportProvider>
+      <>
+        <ReportProvider>
+          <Report {...props}/>
+        </ReportProvider>
+      </>
   )};
 export default ReportScreen
