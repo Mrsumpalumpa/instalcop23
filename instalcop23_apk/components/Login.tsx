@@ -5,6 +5,8 @@ import { useForm, Controller } from 'react-hook-form';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { LoginScreenProps } from '../models/generics';
+import { loginEmail } from '../requests/api';
+import { useAuthContext } from '../providers/AuthProvider';
 
 // Validation schema
 const schema = Yup.object({
@@ -27,55 +29,67 @@ export default function Login(props: LoginScreenProps) {
   const { handleSubmit, control, formState: { errors } } = useForm<FormData>({
     resolver: yupResolver(schema),
   });
-
+  const { setAuth } = useAuthContext()
   const onSubmit = (data: FormData) => {
-    alert(JSON.stringify(data));
-    props.navigation.push('Report');
+    loginEmail(data.email,data.password).then((r)=>{
+      if(r.status===200||r.status===201){
+        setAuth(r.data)
+        props.navigation.push('Profile');
+      }
+      else{
+        alert(`Request Error ${r.status}: ${r.statusText}`)
+      }
+    }).catch((err)=>{
+      alert(`UNCONTROLLED ERROR  ${JSON.stringify(err)}` );
+
+    })
   };
 
   return (
-    <SafeAreaProvider style={styles.container}>
-      <Image source={icon} style={styles.image} />
-      <SafeAreaView style={styles.safeArea}>
-        <Controller
-          name="email"
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={[styles.input, errors.email && styles.errorInput]}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              value={value}
-              placeholder="Email"
-              autoComplete="email"
-              inputMode="email"
-            />
-          )}
-        />
-        {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
+    <>
+      <SafeAreaProvider style={styles.container}>
+        <Image source={icon} style={styles.image} />
+        <SafeAreaView style={styles.safeArea}>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                style={[styles.input, errors.email && styles.errorInput]}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+                placeholder="Email"
+                autoComplete="email"
+                inputMode="email"
+              />
+            )}
+          />
+          {errors.email && <Text style={styles.errorText}>{errors.email.message}</Text>}
 
-        <Controller
-          name="password"
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <TextInput
-              style={[styles.input, errors.password && styles.errorInput]}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              value={value}
-              placeholder="Password"
-              secureTextEntry
-              autoComplete="password"
-            />
-          )}
-        />
-        {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
+          <Controller
+            name="password"
+            control={control}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <TextInput
+                style={[styles.input, errors.password && styles.errorInput]}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+                placeholder="Password"
+                secureTextEntry
+                autoComplete="password"
+              />
+            )}
+          />
+          {errors.password && <Text style={styles.errorText}>{errors.password.message}</Text>}
 
-        <Pressable style={styles.button} onPress={handleSubmit(onSubmit)}>
-          <Text style={styles.text}>Log In</Text>
-        </Pressable>
-      </SafeAreaView>
-    </SafeAreaProvider>
+          <Pressable style={styles.button} onPress={handleSubmit(onSubmit)}>
+            {<Text style={styles.text}>Log In</Text>}
+          </Pressable>
+        </SafeAreaView>
+      </SafeAreaProvider>
+    </>
   );
 }
 

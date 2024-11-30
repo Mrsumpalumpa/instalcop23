@@ -1,9 +1,10 @@
-import {Text} from 'react-native';
 import { ProfileScreenProps } from '../models/generics';
+import Profile from '../components/Profile';
+
 const ProfileScreen = (props:ProfileScreenProps) => {
     return (
-        <Text>{JSON.stringify(props)}</Text>
-
+     <Profile {...props}/>
 
   )};
 export default ProfileScreen
+

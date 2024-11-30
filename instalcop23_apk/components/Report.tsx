@@ -1,9 +1,8 @@
 import { useMemo } from 'react';
 import { StyleSheet, Text, View,Pressable,ActivityIndicator,FlatList } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../models/generics';
+import { ReportScreenProps } from '../models/generics';
 import { useReportContext } from '../providers/ReportProvider';
-type ReportScreenProps = NativeStackScreenProps<RootStackParamsList,"Report">
+
 const Report = (props:ReportScreenProps) => {
     const {report} = useReportContext()
     const list:any[] = useMemo(()=>{
@@ -13,6 +12,7 @@ const Report = (props:ReportScreenProps) => {
     },[report.isLoading,report.isFetching])
     return (
       <>
+      
        {report.isLoading||report.isFetching?
        <View>
         <ActivityIndicator style={styles.loading}/>
@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#333333',
     borderRadius:'10%',
     position:'relative',
-
   },
   text:{
     marginBlock:0,
