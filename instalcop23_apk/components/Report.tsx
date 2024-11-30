@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { StyleSheet, Text, View,Pressable,FlatList } from 'react-native';
+import { StyleSheet, Text, View,Pressable,ActivityIndicator,FlatList } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamsList } from '../models/generics';
 import { useReportContext } from '../providers/ReportProvider';
@@ -13,7 +13,10 @@ const Report = (props:ReportScreenProps) => {
     },[report.isLoading,report.isFetching])
     return (
       <>
-       {report.isLoading||report.isFetching?<Text>Loading</Text>:null}
+       {report.isLoading||report.isFetching?
+       <View>
+        <ActivityIndicator style={styles.loading}/>
+       </View>:null}
        {report.data && report.data.data && report.isSuccess?(
         <FlatList 
           data={list} 
@@ -25,7 +28,11 @@ const Report = (props:ReportScreenProps) => {
 export default Report
 
 const styles = StyleSheet.create({
-  
+  loading:{
+    color:'#f4511e',
+    height:50,
+    fontSize:50
+  },
   button:{
     width:100,
     height:50,

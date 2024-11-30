@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import Login from './components/Login';
+import LoginScreen from './screens/LoginScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ReportScreen from './screens/ReportScreen';
 import { RootStackParamsList } from './models/generics';
@@ -20,18 +20,46 @@ export default function App() {
 
     <NavigationContainer>
       
-      <Stack.Navigator>
+      <Stack.Navigator  >
         <Stack.Screen
           name="Login"
-          component={Login}
+          component={LoginScreen}
+          options={{
+            headerStyle: {
+              backgroundColor:'#9fc6e8',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            
+          }}
         />
         <Stack.Screen 
           name="Profile" 
-          component={ProfileScreen} 
+          component={ProfileScreen}
+          options={{
+            headerStyle: {
+              backgroundColor: '#9fc6e8',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }} 
         />
          <Stack.Screen 
           name="Report" 
           component={ReportScreen} 
+          options={{
+            headerStyle: {
+              backgroundColor: '#9fc6e8',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
         />
       </Stack.Navigator>
       

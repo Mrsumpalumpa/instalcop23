@@ -1,12 +1,9 @@
-import {Text,View,} from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamsList } from '../models/generics';
-type ProfileScreenProps = NativeStackScreenProps<RootStackParamsList,"Profile">
+import {Text} from 'react-native';
+import { ProfileScreenProps } from '../models/generics';
 const ProfileScreen = (props:ProfileScreenProps) => {
     return (
-    <View>
-        <Text>This is {props.route.name}'</Text>
+        <Text>{JSON.stringify(props)}</Text>
 
-    </View>
+
   )};
 export default ProfileScreen
